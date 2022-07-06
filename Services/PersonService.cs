@@ -1,4 +1,5 @@
 ﻿using PersonApp.Models;
+using PersonApp.Repositories;
 
 namespace PersonApp.Services;
 
@@ -6,10 +7,12 @@ public class PersonService: IPersonService
 {
 
     private readonly PersonContext _personContext;
+    private readonly IPersonRepository _personRepository;
 
-    public PersonService(PersonContext personContext)
+    public PersonService(PersonContext personContext, IPersonRepository personRepository)
     {
         _personContext = personContext;
+        _personRepository = personRepository;
     }
 
     public Person? FindById(int id)
@@ -20,6 +23,11 @@ public class PersonService: IPersonService
     public List<Person> FindAll()
     {
         return _personContext.Persons.ToList();
+    }
+
+    public long GetAllCount()
+    {
+        return _personRepository.GetAllCount();
     }
 
     public Person Create(PersonRequest personRequest)
