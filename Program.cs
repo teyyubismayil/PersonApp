@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using PersonApp.Models;
+using PersonApp.Repositories;
 using PersonApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
 builder.Services.AddDbContext<PersonContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

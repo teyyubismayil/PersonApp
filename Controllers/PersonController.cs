@@ -30,7 +30,14 @@ public class PersonController : Controller
         _logger.Log(LogLevel.Information, "Get all persons");
         return _personService.FindAll();
     }
-    
+
+    [HttpGet("count")]
+    public long GetAllCount()
+    {
+        _logger.Log(LogLevel.Information, "Get all count");
+        return _personService.GetAllCount();
+    }
+
     [HttpPost]
     public Person Create([FromBody] PersonRequest personRequest)
     {
